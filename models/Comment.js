@@ -15,7 +15,7 @@ Comment.init(
             type: DataTypes.STRING(500),
             allowNull: false,
         },
-        postedDate: {
+        posted_date: {
             type: DataTypes.DATE,
             allowNull: false,
         },
