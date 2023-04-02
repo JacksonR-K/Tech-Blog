@@ -1,0 +1,99 @@
+/* Colour scheme */
+:root {
+    --primary: #231010;
+    --secondary: #d9ead3;
+    --tertiary: #9a9a9a;
+}
+
+/* Set page colour/default height */
+body {
+    background-color: var(--secondary);
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Remove underlines from links */
+a {
+    text-decoration: none;
+}
+
+/* Add padding around top header */
+header {
+    background-color: var(--primary);
+    padding: 10px 30px;
+}
+
+/* Align nav buttons to the left */
+nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Add colour/spacing to nav buttons */
+nav a {
+    margin-right: 30px;
+    color: var(--secondary);
+}
+
+/* Style title heading */
+h1 {
+    background-color: var(--secondary);
+    color: var(--primary);
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 3px var(--tertiary);
+}
+
+/* Add margin and border to both posts and signup/login forms */
+.card {
+    margin: 15px 30px;
+    border: 2px solid var(--primary);
+}
+
+/* Add padding to header/content of posts and signup/login forms */
+.card h2, .content {
+    padding: 10px;
+}
+
+/* Set the colour of card titles */
+.card h2 {
+    background-color: var(--primary);
+    color: var(--secondary);
+}
+
+/* Set the colour of the content section of posts and signup/login forms */
+.content {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+/* Remove browser's default margin */
+.card h2, .content p {
+    margin: 0;
+}
+
+/* Center the form */
+form {
+    color: var(--primary);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Stretch form text fields and submit button to fill screen */
+.form-input, .submit-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    height: 35px;
+}
+
+/* Add gap above submit button, match box size of text field for equal width, and add rounded corners */
+.submit-button {
+    background-color: var(--tertiary);
+    margin: 10px 0;
+    box-sizing: content-box;
+    border-radius: 5px;
+}
+
