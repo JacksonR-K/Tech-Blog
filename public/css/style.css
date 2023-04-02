@@ -52,13 +52,18 @@ h1 {
     border: 2px solid var(--primary);
 }
 
+.card header {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* Add padding to header/content of posts and signup/login forms */
-.card h2, .content {
+.card header, .content {
     padding: 10px;
 }
 
 /* Set the colour of card titles */
-.card h2 {
+.card header {
     background-color: var(--primary);
     color: var(--secondary);
 }
