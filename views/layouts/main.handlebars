@@ -19,12 +19,21 @@
       <a href="/login">Login</a>
       {{/if}}
     </nav>
-    <h1>The Tech Blog</h1>
+    {{#if dashboard}}
+      <h1>Your Dashboard</h1>
+    {{else}}
+      <h1>The Tech Blog</h1>
+    {{/if}}
   </header>
   <main>
     <div class="posts">
       {{{body}}}
     </div>
+    {{#if viewPost}}
+      <a href="/comment"><button class="add-button">+ Comment</button></a>
+    {{else}}
+      <a href="/create"><button class="add-button">+ New Post</button></a>
+    {{/if}}
   </main>
   {{#if loggedIn}}
   <script src="/js/logout.js"></script>

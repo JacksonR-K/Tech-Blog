@@ -103,3 +103,11 @@ form {
     border-radius: 5px;
 }
 
+.add-button {
+    background-color: var(--primary);
+    color: #ffffff;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+}

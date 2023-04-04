@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
+// Import the custom middleware
+const withAuth = require('../utils/auth');
 
 // GET all posts for homepage
 router.get('/', async (req, res) => {
@@ -30,31 +32,65 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
     try {
         const dbPostData = await Post.findByPk(req.params.id, {
-            // include: [
-            //     {
-            //         model: Post,
-            //         attributes: [
-            //             'id',
-            //             'title',
-            //             'content',
-            //             'posted_date',
-            //         ],
-            //     },
-            //     // {
-            //     //     model: User,
-            //     //     attributes: [
-            //     //         'username'
-            //     //     ],
-            //     // },
-            // ],
+            include: [
+                {
+                    model: User,
+                    attributes: [
+                        'username'
+                    ],
+                },
+            ],
         });
 
         const post = dbPostData.get({ plain: true });
-        res.render('dashboard', { post, loggedIn: req.session.loggedIn });
+        res.render('post', { 
+            post, 
+            loggedIn: req.session.loggedIn,
+            viewPost: true //Value used in main.handlebars to check which button to display ("+ New Post" or "+ Comment")
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
+});
+
+// GET all posts for dashboard
+router.get('/dashboard', withAuth, async (req, res) => {
+    try {
+        const dbPostData = await Post.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: [ 'username' ]
+                },
+            ],
+            where: {
+                user_id: req.session.user_id
+            }
+        });
+
+        const posts = dbPostData.map((post) =>
+            post.get({ plain: true })
+        );
+        res.render('dashboard', {
+            posts,
+            loggedIn: req.session.loggedIn,
+            dashboard: true //Value used in main.handlebars to check which title to display ("The Tech Blog" or "Your Dashboard")
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+//Create new post route
+router.get('/create', withAuth, (req, res) => {
+    res.render('new-post');
+});
+
+//Add comment route
+router.get('/comment', withAuth, (req, res) => {
+    res.render('new-comment');
 });
 
 // Login route
